@@ -125,4 +125,5 @@ cs_mode :: enum {
 
 foreign lib {
     cs_open :: proc(arch : cs_arch, mode : cs_mode, handle : ^csh) -> cs_err ---
+    cs_disasm :: proc(handle : csh, code : []u8, code_size : u32, address : u64, count : u32, insn : ^^cs_insn) -> u32 ---
 }
