@@ -6,7 +6,7 @@ foreign import lib {
 
 CS_MNEMONIC_SIZE :: 32
 
-csh :: u32
+csh :: u64
 
 cs_detail :: struct {}
 
