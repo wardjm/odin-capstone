@@ -123,6 +123,41 @@ cs_mode :: enum {
 	CS_MODE_M680X_HCS08 = 1 << 10, ///< M680X Freescale/NXP HCS08 mode
 }
 
+
+/// Runtime option for the disassembled engine
+cs_opt_type :: enum {
+	CS_OPT_INVALID = 0,	///< No option specified
+	CS_OPT_SYNTAX,	///< Assembly output syntax
+	CS_OPT_DETAIL,	///< Break down instruction structure into details
+	CS_OPT_MODE,	///< Change engine's mode at run-time
+	CS_OPT_MEM,	///< User-defined dynamic memory related functions
+	CS_OPT_SKIPDATA, ///< Skip data when disassembling. Then engine is in SKIPDATA mode.
+	CS_OPT_SKIPDATA_SETUP, ///< Setup user-defined function for SKIPDATA option
+	CS_OPT_MNEMONIC, ///< Customize instruction mnemonic
+	CS_OPT_UNSIGNED, ///< print immediate operands in unsigned form
+}
+
+/// Runtime option value (associated with option type above)
+cs_opt_value :: enum {
+	CS_OPT_OFF = 0,  ///< Turn OFF an option - default for CS_OPT_DETAIL, CS_OPT_SKIPDATA, CS_OPT_UNSIGNED.
+	CS_OPT_ON = 3, ///< Turn ON an option (CS_OPT_DETAIL, CS_OPT_SKIPDATA).
+	CS_OPT_SYNTAX_DEFAULT = 0, ///< Default asm syntax (CS_OPT_SYNTAX).
+	CS_OPT_SYNTAX_INTEL, ///< X86 Intel asm syntax - default on X86 (CS_OPT_SYNTAX).
+	CS_OPT_SYNTAX_ATT,   ///< X86 ATT asm syntax (CS_OPT_SYNTAX).
+	CS_OPT_SYNTAX_NOREGNAME, ///< Prints register name with only number (CS_OPT_SYNTAX)
+	CS_OPT_SYNTAX_MASM, ///< X86 Intel Masm syntax (CS_OPT_SYNTAX).
+} 
+
+/// Common instruction operand types - to be consistent across all architectures.
+cs_op_type :: enum {
+	CS_OP_INVALID = 0,  ///< uninitialized/invalid operand.
+	CS_OP_REG,          ///< Register operand.
+	CS_OP_IMM,          ///< Immediate operand.
+	CS_OP_MEM,          ///< Memory operand.
+	CS_OP_FP,           ///< Floating-Point operand.
+}
+
+
 foreign lib {
     cs_open :: proc(arch : cs_arch, mode : cs_mode, handle : ^csh) -> cs_err ---
     cs_disasm :: proc(handle : csh, code : ^u8, code_size : u32, address : u64, count : u32, insn : ^^cs_insn) -> u32 ---
