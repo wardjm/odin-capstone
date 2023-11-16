@@ -164,4 +164,5 @@ foreign lib {
     cs_disasm :: proc(handle : csh, code : ^u8, code_size : u32, address : u64, count : u32, insn : ^^cs_insn) -> u32 ---
     cs_option :: proc(handle : csh, opt_type : cs_opt_type, value : cs_opt_value) -> cs_err ---
     cs_malloc :: proc(handle : csh) -> ^cs_insn ---
+    cs_disasm_iter :: proc(handle : csh, code : ^[]u8, size : u32, address : u64, insn : ^cs_insn) -> bool ---
 }
