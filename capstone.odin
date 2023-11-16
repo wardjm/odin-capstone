@@ -8,7 +8,16 @@ CS_MNEMONIC_SIZE :: 32
 
 csh :: u64
 
-cs_detail :: struct {}
+cs_detail :: struct {
+    regs_read : [12]u16, ///< list of implicit registers read by this insn
+    regs_read_count : u8, ///< number of implicit registers read by this insn
+
+    regs_write : [20]u16, ///< list of implicit registers modified by this insn
+    regs_write_count : u8, ///< number of implicit registers modified by this insn
+    
+    groups : [8]u8, ///< list of group this instruction belong to
+    groups_count : u8 ///< number of groups this insn belongs to
+}
 
 cs_insn :: struct {
     
