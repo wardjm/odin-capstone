@@ -166,6 +166,18 @@ cs_op_type :: enum {
 	CS_OP_FP,           ///< Floating-Point operand.
 }
 
+/// Common instruction groups - to be consistent across all architectures.
+cs_group_type :: enum {
+	CS_GRP_INVALID = 0,  ///< uninitialized/invalid group.
+	CS_GRP_JUMP,    ///< all jump instructions (conditional+direct+indirect jumps)
+	CS_GRP_CALL,    ///< all call instructions
+	CS_GRP_RET,     ///< all return instructions
+	CS_GRP_INT,     ///< all interrupt instructions (int+syscall)
+	CS_GRP_IRET,    ///< all interrupt return instructions
+	CS_GRP_PRIVILEGE,    ///< all privileged instructions
+	CS_GRP_BRANCH_RELATIVE, ///< all relative branching instructions
+} 
+
 
 foreign lib {
     cs_open :: proc(arch : cs_arch, mode : cs_mode, handle : ^csh) -> cs_err ---
