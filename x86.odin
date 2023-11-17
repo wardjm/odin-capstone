@@ -1786,3 +1786,90 @@ cs_x86_op :: struct {
     /// AVX zero opmask {z}
     avx_zero_opmask : bool
 }
+
+cs_x86_encoding :: struct {
+    /// ModR/M offset, or 0 when irrelevant
+    modrm_offset : u8,
+    
+    /// Displacement offset, or 0 when irrelevant.
+    disp_offset : u8,
+    disp_size : u8,
+    
+    /// Immediate offset, or 0 when irrelevant.
+    imm_offset : u8,
+    imm_size : u8
+}
+
+
+/// Instruction structure
+cs_x86 :: struct {
+    /// Instruction prefix, which can be up to 4 bytes.
+    /// A prefix byte gets value 0 when irrelevant.
+    /// prefix[0] indicates REP/REPNE/LOCK prefix (See X86_PREFIX_REP/REPNE/LOCK above)
+    /// prefix[1] indicates segment override (irrelevant for x86_64):
+    /// See X86_PREFIX_CS/SS/DS/ES/FS/GS above.
+    /// prefix[2] indicates operand-size override (X86_PREFIX_OPSIZE)
+    /// prefix[3] indicates address-size override (X86_PREFIX_ADDRSIZE)
+    prefix : [4]u8,
+    
+    /// Instruction opcode, which can be from 1 to 4 bytes in size.
+    /// This contains VEX opcode as well.
+    /// An trailing opcode byte gets value 0 when irrelevant.
+    opcode : [4]u8,
+    
+    /// REX prefix: only a non-zero value is relevant for x86_64
+    rex : u8,
+    
+    /// Address size, which can be overridden with above prefix[5].
+    addr_size : u8,
+    
+    /// ModR/M byte
+    modrm : u8,
+    
+    /// SIB value, or 0 when irrelevant.
+    sib : u8,
+    
+    /// Displacement value, valid if encoding.disp_offset != 0
+    disp : i64,
+    
+    /// SIB index register, or X86_REG_INVALID when irrelevant.
+    sib_index : x86_reg,
+    /// SIB scale, only applicable if sib_index is valid.
+    sib_scale : i8,
+    /// SIB base register, or X86_REG_INVALID when irrelevant.
+    sib_base : x86_reg,
+    
+    /// XOP Code Condition
+    xop_cc : x86_xop_cc,
+    
+    /// SSE Code Condition
+    sse_cc : x86_sse_cc,
+    
+    /// AVX Code Condition
+    avx_cc : x86_avx_cc,
+    
+    /// AVX Suppress all Exception
+    avx_sae : bool,
+    
+    /// AVX static rounding mode
+    avx_rm : x86_avx_rm,
+    
+    
+//    union {
+	/// EFLAGS updated by this instruction.
+	/// This can be formed from OR combination of X86_EFLAGS_* symbols in x86.h
+//	uint64_t eflags;
+	/// FPU_FLAGS updated by this instruction.
+	/// This can be formed from OR combination of X86_FPU_FLAGS_* symbols in x86.h
+//	uint64_t fpu_flags;
+  //  };
+    flags : u64,
+    
+    /// Number of operands of this instruction,
+    /// or 0 when instruction has no operand.
+    op_count : u8,
+    
+    operands : [8]cs_x86_op,	///< operands for this instruction.
+    
+    encoding : cs_x86_encoding  ///< encoding information
+}
