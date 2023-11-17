@@ -1761,6 +1761,7 @@ x86_op_mem :: struct {
 
 /// Instruction operand
 cs_x86_op :: struct {
+    
     type : x86_op_type,	///< operand type
 
     // C-version, may have to fix later
