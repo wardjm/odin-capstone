@@ -1,7 +1,7 @@
 package capstone
 
 /// X86 instructions
-x86_insn :: enum {
+x86_insn :: enum u32 {
 	X86_INS_INVALID = 0,
 
 	X86_INS_AAA,
@@ -1519,7 +1519,7 @@ x86_insn :: enum {
 }
 
 /// Group of X86 instructions
-x86_insn_group :: enum {
+x86_insn_group :: enum u32 {
 	X86_GRP_INVALID = 0, ///< = CS_GRP_INVALID
 
 	// Generic groups
@@ -1586,7 +1586,7 @@ x86_insn_group :: enum {
 }
 
 /// X86 registers
-x86_reg :: enum {
+x86_reg :: enum u32 {
 	X86_REG_INVALID = 0,
 	X86_REG_AH, X86_REG_AL, X86_REG_AX, X86_REG_BH, X86_REG_BL,
 	X86_REG_BP, X86_REG_BPL, X86_REG_BX, X86_REG_CH, X86_REG_CL,
@@ -1643,7 +1643,7 @@ x86_reg :: enum {
 
 
 /// Operand type for instruction's operands
-x86_op_type :: enum {
+x86_op_type :: enum u32 {
 	X86_OP_INVALID = 0, ///< = CS_OP_INVALID (Uninitialized).
 	X86_OP_REG, ///< = CS_OP_REG (Register operand).
 	X86_OP_IMM, ///< = CS_OP_IMM (Immediate operand).
@@ -1651,7 +1651,7 @@ x86_op_type :: enum {
 } 
 
 /// XOP Code Condition type
-x86_xop_cc :: enum {
+x86_xop_cc :: enum u32 {
 	X86_XOP_CC_INVALID = 0,	///< Uninitialized.
 	X86_XOP_CC_LT,
 	X86_XOP_CC_LE,
@@ -1664,7 +1664,7 @@ x86_xop_cc :: enum {
 }
 
 /// AVX broadcast type
-x86_avx_bcast :: enum {
+x86_avx_bcast :: enum u32 {
 	X86_AVX_BCAST_INVALID = 0,	///< Uninitialized.
 	X86_AVX_BCAST_2,	///< AVX512 broadcast type {1to2}
 	X86_AVX_BCAST_4,	///< AVX512 broadcast type {1to4}
@@ -1673,7 +1673,7 @@ x86_avx_bcast :: enum {
 }
 
 /// SSE Code Condition type
-x86_sse_cc :: enum {
+x86_sse_cc :: enum u32 {
 	X86_SSE_CC_INVALID = 0,	///< Uninitialized.
 	X86_SSE_CC_EQ,
 	X86_SSE_CC_LT,
@@ -1686,7 +1686,7 @@ x86_sse_cc :: enum {
 }
 
 /// AVX Code Condition type
-x86_avx_cc :: enum {
+x86_avx_cc :: enum u32 {
 	X86_AVX_CC_INVALID = 0,	///< Uninitialized.
 	X86_AVX_CC_EQ,
 	X86_AVX_CC_LT,
@@ -1723,7 +1723,7 @@ x86_avx_cc :: enum {
 }
 
 /// AVX static rounding mode type
-x86_avx_rm :: enum {
+x86_avx_rm :: enum u32 {
 	X86_AVX_RM_INVALID = 0,	///< Uninitialized.
 	X86_AVX_RM_RN,	///< Round to nearest
 	X86_AVX_RM_RD,	///< Round down
@@ -1732,7 +1732,7 @@ x86_avx_rm :: enum {
 }
 
 /// Instruction prefixes - to be used in cs_x86.prefix[]
-x86_prefix :: enum {
+x86_prefix :: enum u32 {
 	X86_PREFIX_LOCK		= 	0xf0,	///< lock (cs_x86.prefix[0]
 	X86_PREFIX_REP		= 	0xf3,	///< rep (cs_x86.prefix[0]
 	X86_PREFIX_REPE		= 	0xf3,	///< repe/repz (cs_x86.prefix[0]
@@ -1847,7 +1847,7 @@ cs_x86 :: struct {
     
     /// AVX Code Condition
     avx_cc : x86_avx_cc,
-    
+
     /// AVX Suppress all Exception
     avx_sae : b8,
     
