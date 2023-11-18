@@ -1849,7 +1849,7 @@ cs_x86 :: struct {
     avx_cc : x86_avx_cc,
     
     /// AVX Suppress all Exception
-    avx_sae : b32,
+    avx_sae : b8,
     
     /// AVX static rounding mode
     avx_rm : x86_avx_rm,
