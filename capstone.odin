@@ -22,7 +22,7 @@ cs_detail :: struct {
     groups : [8]u8, ///< list of group this instruction belong to
     groups_count : u8, ///< number of groups this insn belongs to
 
-    ins_info : ins_set
+    ins_info : cs_x86
 }
 
 cs_insn :: struct {
